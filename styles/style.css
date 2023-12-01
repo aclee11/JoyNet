@@ -1,0 +1,34 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100vh;
+  width: 100vw;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Cutive+Mono&family=DM+Sans:opsz@9..40&display=swap');
+
+body {
+  font-family: 'Cutive Mono', monospace;
+  font-size: 16px;
+  background-color:#E9FAFF;
+  height: 100%;
+  width: 100%;
+}
+
+a {
+  color:salmon;
+}
+
+/* .container {
+  width: 80%;
+  height: 80%;
+} */
+
+.object-div {
+  box-sizing: border-box;
+  padding: 10px;
+  /* border: 1px solid #ccc; */
+  margin-bottom: 10px;
+}
