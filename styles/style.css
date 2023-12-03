@@ -12,23 +12,32 @@ html {
 body {
   font-family: 'Cutive Mono', monospace;
   font-size: 16px;
-  background-color:#E9FAFF;
+  background-color: #21211D;
+  height: 100%;
+  width: 100%;
+  color: white;
+}
+
+.outerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100%;
   width: 100%;
 }
-
-a {
-  color:salmon;
+.inputContainer {
+  background-color: #FFFA8D;
+  width: 30%;
+  height: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* .container {
-  width: 80%;
-  height: 80%;
-} */
-
+/* styling the CSV results */
 .object-div {
   box-sizing: border-box;
   padding: 10px;
-  /* border: 1px solid #ccc; */
   margin-bottom: 10px;
+  color: black;
 }
