@@ -30,8 +30,11 @@ body {
   width: 30%;
   height: 30%;
   display: flex;
+  flex-direction:column;
   justify-content: center;
   align-items: center;
+  color: black;
+  padding: 8px;
 }
 
 a {
