@@ -1,7 +1,26 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function () {
   const objectDivs = [];
+  
+  //listening for and logging user input
+  const userInput = document.getElementById('inputField');
+  userInput.addEventListener('keyup', function (event) {
+    if (event.key === 'Enter') {
+      const userText = userInput.value.trim();
 
-  //parsing the CSV and turning rows into workable objects
+      console.log('User input:', userText);
+
+      if (userText !== '') {
+        const userDiv = document.createElement('div');
+        userDiv.textContent = userText;
+        userDiv.classList.add('userDiv');
+        document.body.appendChild(userDiv);
+        userInput.value = ''; // Clear the input field
+        fetchData(); // retrieve CSV results
+      }
+    }
+  });
+
+  // CSV processing function
   async function fetchData() {
     try {
       // Fetch the CSV file (hm125 has been cleaned to remove rows with >125 characters)
@@ -31,24 +50,26 @@ document.addEventListener('DOMContentLoaded', () => {
         objectDivs.push(objectDiv);
         document.body.appendChild(objectDiv);
       });
-      //style changes upon hitting Enter
-        //hide input container
+
+      // Style changes upon hitting Enter
+      // Hide input container
       const inputContainer = document.querySelector('.inputContainer');
       inputContainer.style.display = 'none';
-        //change background color
+
+      // Change background color
       const body = document.querySelector('body');
-      body.style.backgroundColor = '#FFFA8D'; 
-        //change footer text color
+      body.style.backgroundColor = '#FFFA8D';
+
+      // Change footer text color
       const footerText = document.getElementById('footerText');
       footerText.style.color = 'black';
-
 
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   }
 
-  // add CSS class ("object-div") and create object div elements
+  // Add CSS class ("object-div") and create object div elements
   function createObjectDiv(row) {
     const objectDiv = document.createElement('div');
     objectDiv.classList.add('object-div');
@@ -57,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return objectDiv;
   }
 
-  // placing the object divs in random spots within a fixed window
+  // Placing the object divs in random spots within a fixed window
   function positionObjectDiv(objectDiv, columnIndex, columnWidth) {
     const windowHeight = window.innerHeight;
     const windowWidth = window.innerWidth;
@@ -78,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
     objectDiv.style.padding = `${padding}px`;
   }
 
-  // defining shuffle function using Fisher-Yates shuffle algorithm
+  // Defining shuffle function using Fisher-Yates shuffle algorithm
   function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -86,16 +107,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     return array;
   }
-
-  const inputField = document.getElementById('inputField');
-
-  inputField.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter' || event.keyCode === 13) {
-      // Prevent the default behavior (form submission or newline in a text area)
-      event.preventDefault();
-
-      // Run your CSV processing code here
-      fetchData();
-    }
-  });
 });

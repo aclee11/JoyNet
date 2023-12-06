@@ -53,3 +53,13 @@ a {
 footer {
   padding: 5px;
 }
+
+/* styling the user's input response */
+.userDiv {
+  color: black;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
