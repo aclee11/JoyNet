@@ -13,9 +13,15 @@ document.addEventListener('DOMContentLoaded', function () {
         const userDiv = document.createElement('div');
         userDiv.textContent = userText;
         userDiv.classList.add('userDiv');
+      
+        // Adding the 'show' class in the next animation frame
+        requestAnimationFrame(() => {
+          userDiv.classList.add('show');
+        });
+      
         document.body.appendChild(userDiv);
         userInput.value = ''; // Clear the input field
-        fetchData(); // retrieve CSV results
+        fetchData(); // Retrieve CSV results
       }
     }
   });
@@ -35,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
       rows = rows.filter(row => row.some(cell => cell.trim() !== ''));
 
       // Randomly select 3 rows and distribute them randomly across 6 columns
-      const sampledRows = rows.slice(0, 3);
+      const sampledRows = rows.slice(0, 6);
       const numColumns = 6;
       const shuffledColumns = shuffle(Array.from({ length: numColumns }, (_, index) => index));
 
@@ -44,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const columnWidth = windowWidth / numColumns;
 
       sampledRows.forEach((row, rowIndex) => {
-        const objectDiv = createObjectDiv(row);
+        const objectDiv = createObjectDiv(row, rowIndex);
         const columnIndex = shuffledColumns[rowIndex];
         positionObjectDiv(objectDiv, columnIndex, columnWidth);
         objectDivs.push(objectDiv);
@@ -70,13 +76,52 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Add CSS class ("object-div") and create object div elements
-  function createObjectDiv(row) {
+  function createObjectDiv(row, index) {
     const objectDiv = document.createElement('div');
     objectDiv.classList.add('object-div');
     const cleanedRow = row.map(cell => cell.replace(/["\[\]\r]/g, ''));
     objectDiv.textContent = cleanedRow.join(', ');
+
+    // Set delays for each element and then add the "show" class to increase opacity to 1
+    const delays = [2000, 2500, 3000, 3500, 4000, 4500];
+    const delay = delays[index] || 0;
+    setTimeout(() => {
+      requestAnimationFrame(() => {
+        objectDiv.classList.add('show');
+        drawLineBetweenObjects(objectDiv, objectDivs[index - 1]); // Draw line to the previous element
+      });
+    }, delay);
+
     return objectDiv;
   }
+
+  function drawLineBetweenObjects(object1, object2) {
+    const lineContainer = document.getElementById('lineContainer');
+
+    // Create an SVG line element
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.classList.add('line');
+
+    // Get coordinates of the two objects
+    const rect1 = object1.getBoundingClientRect();
+    const rect2 = object2.getBoundingClientRect();
+
+    // Calculate line coordinates
+    const x1 = rect1.left + rect1.width / 2;
+    const y1 = rect1.top + rect1.height / 2;
+    const x2 = rect2.left + rect2.width / 2;
+    const y2 = rect2.top + rect2.height / 2;
+
+    // Set line coordinates
+    line.setAttribute('x1', x1);
+    line.setAttribute('y1', y1);
+    line.setAttribute('x2', x2);
+    line.setAttribute('y2', y2);
+
+    // Append the line to the line container
+    lineContainer.appendChild(line);
+  }
+
 
   // Placing the object divs in random spots within a fixed window
   function positionObjectDiv(objectDiv, columnIndex, columnWidth) {
@@ -108,3 +153,5 @@ document.addEventListener('DOMContentLoaded', function () {
     return array;
   }
 });
+
+
