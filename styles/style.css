@@ -91,3 +91,10 @@ footer {
   stroke-width: 1;
   stroke-opacity: .2;
 }
+
+input {
+  font-family: 'Noto Serif JP', serif;
+  padding: 10px;
+  margin: 10px;
+  background-color: #FFFDD9;
+}

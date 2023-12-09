@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
   const objectDivs = [];
-  
+  const gimmeBtn = document.getElementById('gimmeBtn');
+
   //listening for and logging user input
   const userInput = document.getElementById('inputField');
   userInput.addEventListener('keyup', function (event) {
@@ -22,6 +23,10 @@ document.addEventListener('DOMContentLoaded', function () {
         document.body.appendChild(userDiv);
         userInput.value = ''; // Clear the input field
         fetchData(); // Retrieve CSV results
+
+        setTimeout(() => {
+          gimmeBtn.style.display = 'block';
+        }, 7000);
       }
     }
   });
@@ -152,6 +157,21 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     return array;
   }
-});
 
+  gimmeBtn.addEventListener('click', function () {
+    // Remove existing CSV results
+    objectDivs.forEach(div => div.remove());
+    // gimmeBtn.style.display = 'none';
+    fetchData();
+
+
+    // // Fetch new CSV results and display them after a delay
+    // setTimeout(() => {
+    //   fetchData();
+    // }, 5000); // Adjust the delay as needed
+  });
+
+  // Set initial style for the "Gimme more joy!" button
+  gimmeBtn.style.display = 'none';
+});
 
