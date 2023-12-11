@@ -11,6 +11,7 @@ body {
   font-family: 'Noto Serif JP', serif;
   font-size: 18px;
   background-color: #21211D;
+  font-weight: bolder;
   height: 100%;
   width: 100%;
   margin: 0; 
@@ -50,7 +51,7 @@ a {
   color: black;
   opacity: 0;
   transition: opacity .4s ease;
-  background-color: rgb(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.735);
 }
 
 .object-div.show {
@@ -63,14 +64,16 @@ footer {
 
 /* styling the user's input response */
 .userDiv {
-  color: black;
+  color:  #FFFDD9;
   position: fixed;
   top: 50%;
   left: 50%;
+  padding: 10px;
+  margin-bottom: 10px;
   transform: translate(-50%, -50%);
   opacity: 0;
   transition: opacity 3s ease;
-  background-color: rgb(255, 255, 255, 0.8);
+  background-color: rgba(0, 0, 0, 0.735);
 }
 
 .userDiv.show {
@@ -88,8 +91,8 @@ footer {
 
 .line {
   stroke: #000;
-  stroke-width: 1;
-  stroke-opacity: .2;
+  stroke-width: 3;
+  stroke-opacity: .1;
 }
 
 input {
@@ -97,4 +100,14 @@ input {
   padding: 10px;
   margin: 10px;
   background-color: #FFFDD9;
+}
+
+.gimmeBtn {
+  padding: 10px;
+  margin: 10px;
+  margin-left: 50%;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 18px;
+  background-color: #21211dab;
+  color: white;
 }

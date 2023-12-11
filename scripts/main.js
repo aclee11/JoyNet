@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         setTimeout(() => {
           gimmeBtn.style.display = 'block';
-        }, 7000);
+        }, 5000);
       }
     }
   });
@@ -174,4 +174,5 @@ document.addEventListener('DOMContentLoaded', function () {
   // Set initial style for the "Gimme more joy!" button
   gimmeBtn.style.display = 'none';
 });
+
 
