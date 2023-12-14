@@ -9,18 +9,24 @@
 <body>
     <svg id="lineContainer"></svg>
     <div class="outerContainer">
+        <div>Reflect on the last 24 hours.</div>
+        <br>
+        <div class="timeContainer">
+            It's&nbsp<div id="currentTime"></div>&nbspright now, so...same time, but yesterday.
+        </div>
+        <br>
+        <div class="timeContainer">Between now and then, what's&nbsp<u>one thing</u>&nbspthat made you&nbsp<u>happy</u>?</div>
         <div class="inputContainer">
-            <p>Reflect on the last 24 hours. What's one thing that made you happy?</p>
             <input type="text" id="inputField" placeholder="...type here">
             <p>Press enter when ready.</p>
         </div>
         <div class="container">
             <ul id="csvData"></ul>
         </div>
-        <button id="gimmeBtn" class="gimmeBtn" style="display: none;">Gimme more joy!</button>
     </div>
     <footer>
         <div id="footerText"><em><a href="index.html" id="startOver">Start over</a> | <a href="about.html">About JoyNet</a></em></div>
+        <button id="gimmeBtn" class="gimmeBtn" style="display: none;"><em>Gimme more joy!!!!</em></button>
     </footer>
 </body>
 <script src="./scripts/main.js"></script>

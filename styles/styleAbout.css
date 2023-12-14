@@ -53,4 +53,10 @@ a {
 
 footer {
   padding: 5px;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.footerLink {
+  text-decoration: none;
 }

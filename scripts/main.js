@@ -1,3 +1,12 @@
+var now = new Date();
+var timeOptions = {
+  hour: 'numeric',
+  minute: 'numeric',
+  hour12: true,
+};
+var currentTime = now.toLocaleString(undefined, timeOptions);
+document.getElementById("currentTime").innerHTML = currentTime;
+
 document.addEventListener('DOMContentLoaded', function () {
   const objectDivs = [];
   const gimmeBtn = document.getElementById('gimmeBtn');
@@ -7,8 +16,6 @@ document.addEventListener('DOMContentLoaded', function () {
   userInput.addEventListener('keyup', function (event) {
     if (event.key === 'Enter') {
       const userText = userInput.value.trim();
-
-      console.log('User input:', userText);
 
       if (userText !== '') {
         const userDiv = document.createElement('div');
@@ -26,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         setTimeout(() => {
           gimmeBtn.style.display = 'block';
-        }, 5000);
+        }, 8000);
       }
     }
   });
@@ -34,8 +41,8 @@ document.addEventListener('DOMContentLoaded', function () {
   // CSV processing function
   async function fetchData() {
     try {
-      // Fetch the CSV file (hm125 has been cleaned to remove rows with >125 characters)
-      const response = await fetch('hm125.csv');
+      // Fetch the CSV file (cleanedhm.csv has been cleaned to remove rows with >125 characters)
+      const response = await fetch('cleanedhm.csv');
       const text = await response.text();
 
       // Split the CSV text into rows and shuffle the rows to get a random assortment
@@ -63,13 +70,14 @@ document.addEventListener('DOMContentLoaded', function () {
       });
 
       // Style changes upon hitting Enter
-      // Hide input container
-      const inputContainer = document.querySelector('.inputContainer');
-      inputContainer.style.display = 'none';
+      // Hide outer container
+      const outerContainer = document.querySelector('.outerContainer');
+      outerContainer.style.visibility = 'hidden';
 
-      // Change background color
+      // Change background color and font size
       const body = document.querySelector('body');
       body.style.backgroundColor = '#FFFA8D';
+      body.style.fontSize = '18px';
 
       // Change footer text color
       const footerText = document.getElementById('footerText');
@@ -99,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     return objectDiv;
   }
-
+  //function for drawing lines between each CSV result object
   function drawLineBetweenObjects(object1, object2) {
     const lineContainer = document.getElementById('lineContainer');
 
@@ -144,8 +152,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     objectDiv.style.position = 'absolute';
     objectDiv.style.top = `${randomTop}px`;
-    objectDiv.style.left = `${Math.min(randomLeft, maxLeft)}px`; // Ensure left doesn't go beyond maxLeft
-    objectDiv.style.width = `${Math.min(maxWidth, columnWidth - padding * 2)}px`; // Ensure width doesn't exceed maxWidth
+    objectDiv.style.left = `${Math.min(randomLeft, maxLeft)}px`; 
+    objectDiv.style.width = `${Math.min(maxWidth, columnWidth - padding * 2)}px`; 
     objectDiv.style.padding = `${padding}px`;
   }
 
@@ -157,22 +165,30 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     return array;
   }
+  gimmeBtn.addEventListener('mouseover', function () {
+    gimmeBtn.style.backgroundColor = 'black';
+    gimmeBtn.style.color = '#fff98d';
+    gimmeBtn.style.borderColor = 'white';
+  });
+
+  gimmeBtn.addEventListener('mouseout', function () {
+    gimmeBtn.style.backgroundColor = 'white';
+    gimmeBtn.style.color = 'black';
+    gimmeBtn.style.borderColor = 'black';
+  });
 
   gimmeBtn.addEventListener('click', function () {
     // Remove existing CSV results
     objectDivs.forEach(div => div.remove());
-    // gimmeBtn.style.display = 'none';
+    gimmeBtn.style.visibility = 'hidden';
     fetchData();
+    setTimeout(() => {
+      gimmeBtn.style.visibility = 'visible';
+    }, 8000);
 
-
-    // // Fetch new CSV results and display them after a delay
-    // setTimeout(() => {
-    //   fetchData();
-    // }, 5000); // Adjust the delay as needed
   });
 
   // Set initial style for the "Gimme more joy!" button
   gimmeBtn.style.display = 'none';
 });
-
 
